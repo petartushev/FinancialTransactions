@@ -1,8 +1,8 @@
 import random
 import psycopg2
 from psycopg2 import sql
-
 from faker import Faker
+from variables import DB, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_SCHEMA
 
 N = 10
 SEED = 0
@@ -12,7 +12,15 @@ gender = False
 
 generator = Faker()
 
-connection = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="localhost", port=5432)
+connection = psycopg2.connect(
+    database=DB, 
+    user=DB_USER, 
+    password=DB_PASS, 
+    host=DB_HOST, 
+    port=DB_PORT
+)
+
+
 
 cursor = connection.cursor()
 
@@ -40,7 +48,9 @@ for _ in range(N):
 
     try:
 
-        insert_query = sql.SQL('INSERT INTO postgres.public.Client (client_embg, client_name, date_of_birth) VALUES (%s, %s, %s)')
+        insert_query = sql.SQL(
+            f'INSERT INTO {DB}.{DB_SCHEMA}.client (client_embg, client_name, date_of_birth) VALUES (%s, %s, %s)'
+        )
 
         cursor.execute(insert_query, (embg_client, full_name, date_of_birth))
 
