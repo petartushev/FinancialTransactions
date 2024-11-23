@@ -24,15 +24,6 @@ public class Transaction {
         this.amount = amount;
     }
 
-//    public Transaction(String sendingClientName, String sendingClientAccountNumber, String receivingClientName, String receivingClientAccountNumber, BigDecimal amount) {
-//        this.sendingClientName = sendingClientName;
-//        this.sendingClientAccountNumber = sendingClientAccountNumber;
-//        this.receivingClientName = receivingClientName;
-//        this.receivingClientAccountNumber = receivingClientAccountNumber;
-//        this.amount = amount;
-//    }
-
-
     public String getTransactionId(){
         return transactionId;
     }
