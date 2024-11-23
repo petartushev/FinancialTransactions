@@ -1,12 +1,18 @@
+import json
+from pathlib import Path
+
 import psycopg2
 from psycopg2 import sql
 from kafka import KafkaProducer
 import numpy as np
 import time
 import hashlib
-
-from transaction import Transaction
 from utils import parse_db_return
+
+path = Path(__file__).parent.parent.parent
+
+with open(path / '.db_credentials.json', 'r') as f:
+    credentials = json.load(f)
 
 def generate_transaction_id(input: str):
 
@@ -26,11 +32,18 @@ def generate_transaction_id(input: str):
 
 kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092', value_serializer=lambda x: x.encode('utf-8'))
 
-connection = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="localhost", port=5432)
+connection = psycopg2.connect(
+    database=credentials['DB'], 
+    user=credentials['DB_USER'], 
+    password=credentials['DB_PASS'], 
+    host=credentials['DB_HOST'], 
+    port=credentials['DB_PORT']
+)
+
 
 cursor = connection.cursor()
 
-select_query = sql.SQL('SELECT a.account_id FROM postgres.public.account a')
+select_query = sql.SQL(f'SELECT a.account_id FROM {credentials["DB"]}.{credentials["DB_SCHEMA"]}.account a')
 
 try:
 
@@ -60,9 +73,9 @@ try:
 
             continue
 
-        query = '''
+        query = f'''
         SELECT a.balance 
-        FROM postgres.public.account a
+        FROM {credentials["DB"]}.{credentials["DB_SCHEMA"]}.account a
         WHERE a.account_id = %s
         '''
 
@@ -87,7 +100,7 @@ try:
 
         # print(value)
 
-        time.sleep(np.random.random()*11.5)
+        # time.sleep(np.random.random()*11.5)
 
 except KeyboardInterrupt as e:
 

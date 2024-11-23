@@ -1,10 +1,16 @@
+import json
+from pathlib import Path
 import psycopg2
 from psycopg2 import sql
 import numpy as np
 import pandas as pd
 import hashlib
-
 from faker import Faker
+
+path = Path(__file__).parent.parent.parent
+
+with open(path / '.db_credentials.json', 'r') as f:
+    credentials = json.load(f)
 
 N = 10
 SEED = 0
@@ -14,10 +20,18 @@ Faker.seed(SEED)
 
 generator = Faker()
 
-connection = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="localhost", port=5432)
+connection = psycopg2.connect(
+    database=credentials['DB'], 
+    user=credentials['DB_USER'], 
+    password=credentials['DB_PASS'], 
+    host=credentials['DB_HOST'], 
+    port=credentials['DB_PORT']
+)
+
+
 curr = connection.cursor()
 
-select_query = sql.SQL('SELECT * FROM postgres.public.Client')
+select_query = sql.SQL(f'SELECT * FROM {credentials["DB"]}.{credentials["DB_SCHEMA"]}.client')
 
 try:
 
@@ -53,7 +67,7 @@ def generate_account_id(input: str):
     return account_id
 
 
-insert_query = sql.SQL('INSERT INTO postgres.public.Account (account_id, client_embg, currency_type, balance) VALUES (%s, %s, %s, %s)')
+insert_query = sql.SQL(f'INSERT INTO {credentials["DB"]}.{credentials["DB_SCHEMA"]}.account (account_id, client_embg, currency_type, balance) VALUES (%s, %s, %s, %s)')
 
 all_accounts = set()
 i = 0

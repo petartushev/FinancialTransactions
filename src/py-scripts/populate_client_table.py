@@ -1,8 +1,15 @@
+import json
+from pathlib import Path
+
 import random
 import psycopg2
 from psycopg2 import sql
 from faker import Faker
-from variables import DB, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_SCHEMA
+
+path = Path(__file__).parent.parent.parent
+
+with open(path / '.db_credentials.json', 'r') as f:
+    credentials = json.load(f)
 
 N = 10
 SEED = 0
@@ -13,12 +20,14 @@ gender = False
 generator = Faker()
 
 connection = psycopg2.connect(
-    database=DB, 
-    user=DB_USER, 
-    password=DB_PASS, 
-    host=DB_HOST, 
-    port=DB_PORT
+    database=credentials['DB'], 
+    user=credentials['DB_USER'], 
+    password=credentials['DB_PASS'], 
+    host=credentials['DB_HOST'], 
+    port=credentials['DB_PORT']
 )
+
+
 
 
 
@@ -49,7 +58,7 @@ for _ in range(N):
     try:
 
         insert_query = sql.SQL(
-            f'INSERT INTO {DB}.{DB_SCHEMA}.client (client_embg, client_name, date_of_birth) VALUES (%s, %s, %s)'
+            f'INSERT INTO {credentials["DB"]}.{credentials["DB_SCHEMA"]}.client (client_embg, client_name, date_of_birth) VALUES (%s, %s, %s)'
         )
 
         cursor.execute(insert_query, (embg_client, full_name, date_of_birth))
