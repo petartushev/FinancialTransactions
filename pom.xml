@@ -88,14 +88,6 @@
         </dependency>
 
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-flink-runtime-1.12 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.iceberg</groupId>-->
-<!--            <artifactId>iceberg-flink-runtime-1.12</artifactId>-->
-<!--            <version>0.13.2</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-runtime -->
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -111,13 +103,6 @@
             <scope>test</scope>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.flink/flink-json &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-json</artifactId>-->
-<!--            <version>1.19.1</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-core -->
         <dependency>
@@ -133,30 +118,6 @@
             <artifactId>iceberg-flink</artifactId>
             <version>1.6.1</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-api -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.iceberg</groupId>-->
-<!--            <artifactId>iceberg-api</artifactId>-->
-<!--            <version>1.6.1</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-common -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.iceberg</groupId>-->
-<!--            <artifactId>iceberg-common</artifactId>-->
-<!--            <version>1.6.1</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-parquet -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.iceberg</groupId>-->
-<!--            <artifactId>iceberg-parquet</artifactId>-->
-<!--            <version>1.6.1</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-
 
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -202,13 +163,6 @@
             <version>5.6.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-flink-runtime-1.12 -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.iceberg</groupId>-->
-<!--            <artifactId>iceberg-flink-runtime-1.12</artifactId>-->
-<!--            <version>0.13.2</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-flink-runtime-1.19 -->
         <dependency>
             <groupId>org.apache.iceberg</groupId>
